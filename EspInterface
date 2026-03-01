@@ -74,19 +74,6 @@ local function getBoundingBox(parts)
 	return CFrame.new(center, front), max - min;
 end
 
-function EspInterface.Refresh()
-	for _, player in ipairs(players:GetPlayers()) do
-		if player ~= localPlayer then
-			if not EspInterface._objectCache[player] then
-				EspInterface._objectCache[player] = {
-					EspObject.new(player, EspInterface),
-					ChamObject.new(player, EspInterface)
-				}
-			end
-		end
-	end
-end
-
 local function worldToScreen(world)
 	local screen, inBounds = wtvp(camera, world);
 	return Vector2.new(screen.X, screen.Y), inBounds, screen.Z;
@@ -736,4 +723,16 @@ function EspInterface.getHealth(player)
 	return 100, 100;
 end
 
+function EspInterface.Refresh()
+	for _, player in ipairs(players:GetPlayers()) do
+		if player ~= localPlayer then
+			if not EspInterface._objectCache[player] then
+				EspInterface._objectCache[player] = {
+					EspObject.new(player, EspInterface),
+					ChamObject.new(player, EspInterface)
+				}
+			end
+		end
+	end
+end
 return EspInterface;
